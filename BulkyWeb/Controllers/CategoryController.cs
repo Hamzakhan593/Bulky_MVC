@@ -31,7 +31,10 @@ namespace BulkyWeb.Controllers
             {
                 ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
             }
-
+            if (obj.CategoryName.ToLower() == "text")
+            {
+                ModelState.AddModelError("", "text is invalid");
+            }
             if (ModelState.IsValid)
             {
                 _db.categories.Add(obj);
