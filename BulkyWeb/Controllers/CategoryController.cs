@@ -46,5 +46,51 @@ namespace BulkyWeb.Controllers
             }
             return View();
         }
+
+
+
+
+        //Edit
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category categoryFromDb = _db.categories.FirstOrDefault(u => u.CategoryId == id);
+            //Category categoryFromDb = _db.categories.Find(id);
+            //Category categoryFromDb = _db.categories.where(u=>u.categoryId == id).firstordefault;
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            //if (obj.CategoryName == obj.CategoryDisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
+            //}
+
+            //if (obj.CategoryName.ToLower() == "text")
+            //{
+            //    ModelState.AddModelError("", "text is invalid");
+            //}
+
+
+            if (ModelState.IsValid)
+            {
+                _db.categories.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("index");
+            }
+            return View();
+        }
+
     }
 }
