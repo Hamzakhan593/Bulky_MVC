@@ -9,10 +9,12 @@
         <div class="mb-3 row">
             <label asp-for="CategoryName" class="p-1"></label>
             <input asp-for="CategoryName" type="text" class="form-control" />
+            <span asp-validation-for="CategoryName" class="text-bg-danger" ></span>
         </div>
         <div class="mb-3 row">
             <label asp-for="CategoryDisplayOrder" class="p-1"></label>
             <input asp-for="CategoryDisplayOrder" type="number" class="form-control" />
+            <span asp-validation-for="CategoryDisplayOrder" class="text-bg-danger"></span>
         </div>
 
         <div class="row">

@@ -1,6 +1,7 @@
 ﻿using BulkyWeb.Data;
 using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BulkyWeb.Controllers
 {
@@ -26,9 +27,18 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("index");
+            if(obj.CategoryName == obj.CategoryDisplayOrder.ToString())
+            {
+                ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("index");
+            }
+            return View();
         }
     }
 }
