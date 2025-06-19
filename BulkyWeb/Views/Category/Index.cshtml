@@ -1,9 +1,6 @@
 ﻿@model List<Category>
-
-    @if(TempData["success"] != null){
-        <h3>@TempData["success"]</h3>
-    }
-
+ @* using partial view for toaster notifications *@
+<partial name="_Notification"/> 
 <div class="container">
     <div class=" row pt-4 pb-3">
         <div class="col-6">
