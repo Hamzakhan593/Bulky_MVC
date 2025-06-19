@@ -92,5 +92,50 @@ namespace BulkyWeb.Controllers
             return View();
         }
 
+
+
+        //Delete
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category categoryFromDb = _db.categories.FirstOrDefault(u => u.CategoryId == id);
+            //Category categoryFromDb = _db.categories.Find(id);
+            //Category categoryFromDb = _db.categories.where(u=>u.categoryId == id).firstordefault;
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            //if (obj.CategoryName == obj.CategoryDisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
+            //}
+
+            //if (obj.CategoryName.ToLower() == "text")
+            //{
+            //    ModelState.AddModelError("", "text is invalid");
+            //}
+
+            Category? obj =  _db.categories.Find(id);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+             _db.categories.Remove(obj);
+             _db.SaveChanges();
+             return RedirectToAction("index");
+
+        }
+
     }
 }
