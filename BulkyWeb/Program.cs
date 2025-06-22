@@ -1,3 +1,5 @@
+using Bulky.DataAccess.Resository;
+using Bulky.DataAccess.Resository.IRepository;
 using BulkyWeb.DataAccess;
 using BulkyWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")));
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
