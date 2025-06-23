@@ -4,27 +4,26 @@ using BulkyWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bulky.DataAccess.Resository
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        public CategoryRepository(ApplicationDbContext db) : base(db)
+        public ICategoryRepository CategoryRepository { get; set; }
+
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            CategoryRepository = new CategoryRepository(_db);
         }
-        //public void Save()
-        //{
-        //    //_db.SaveChanges();
-        //}
 
-        public void Update(Category category)
+
+        public void IUWSave()
         {
-            _db.categories.Update(category);
+            _db.SaveChanges();
         }
     }
 }
