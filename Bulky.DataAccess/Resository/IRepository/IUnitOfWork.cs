@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bulky.DataAccess.IRepository;
+using Bulky.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,9 @@ namespace Bulky.DataAccess.Resository.IRepository
     public interface IUnitOfWork
     {
         ICategoryRepository CategoryRepository { get; }
+        //IRepository<Product> ProductRespository {  get; }
+        IProductRepository ProductRepository { get; }
+            
         void IUWSave();
     }
 }

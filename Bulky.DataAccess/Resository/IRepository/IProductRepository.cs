@@ -1,6 +1,6 @@
 ﻿using Bulky.DataAccess.IRepository;
 using Bulky.Models;
-using BulkyWeb.Models;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace Bulky.DataAccess.Resository.IRepository
 {
-    public interface ICategoryRepository : IRepository<Category> 
+    public interface IProductRepository : IRepository<Product>
     {
-        void Update(Category category);
-        //void Save();
+        void Update(Product product);
     }
 }
