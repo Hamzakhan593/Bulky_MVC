@@ -24,7 +24,7 @@
                 <th>Price (1-50)</th>
                 <th>Price (50+)</th>
                 <th>Price (100+)</th>
-                <th></th>
+                <th>Category</th>
             </tr>
         </thead>
 
@@ -39,6 +39,7 @@
                     <td>@obj.Price</td>
                     <td>@obj.Price50</td>
                     <td>@obj.Price100</td>
+                    <td>@obj.CategoryId</td>
                     <td>
                         <div class="w-75 btn-group" role="group">
                             <a asp-route-id="@obj.ProductId" asp-controller="Product" asp-action="Edit" class="btn btn-primary mx-2">

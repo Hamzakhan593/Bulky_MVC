@@ -66,6 +66,14 @@
                 </div>
 
 
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
+                        <option disabled selected value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-bg-danger"></span>
+                </div>
+
+
                 <div class="row pt-2 mt-3">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Create</button>
