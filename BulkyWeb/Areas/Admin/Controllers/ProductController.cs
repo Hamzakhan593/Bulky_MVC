@@ -1,5 +1,6 @@
 ﻿using Bulky.DataAccess.Resository.IRepository;
 using Bulky.Models;
+using Bulky.Models.ViewModel;
 using BulkyWeb.DataAccess.Data;
 using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -30,22 +31,36 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CategoryList = _db.categories
-                .Select(c => new SelectListItem
+            //IEnumerable<SelectListItem> CList = _db.categories
+            //    .Select(c => new SelectListItem
+            //    {
+            //        Text = c.CategoryName,
+            //        Value = c.CategoryId.ToString()
+            //    });
+            //ViewBag.CategoryList = CategoryList;
+
+
+
+            ProductViewModel productVM = new()
+            {
+                CategoryList = _unitOfWork.CategoryRepository
+                .GetAll().Select(u => new SelectListItem
                 {
-                    Text = c.CategoryName,
-                    Value = c.CategoryId.ToString()
-                });
-            ViewBag.CategoryList = CategoryList;
-            return View();
+                    Text = u.CategoryName,
+                    Value = u.CategoryId.ToString()
+                }),
+                Product = new Product()
+            };
+            return View(productVM);
         }
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel obj)
         {
-            if (ModelState.IsValid) 
-            { 
-                _unitOfWork.ProductRepository.Add(product);
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.ProductRepository.Add(obj.Product);
                 _unitOfWork.IUWSave();
+                TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -65,6 +80,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 _unitOfWork.ProductRepository.Update(obj);
                 _unitOfWork.IUWSave();
+                TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +103,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
                 _unitOfWork.ProductRepository.Remove(obj);
                 _unitOfWork.IUWSave();
-                return RedirectToAction("Index");
+            TempData["success"] = "Category Deleted Successfully";
+            return RedirectToAction("Index");
         }
     }
 

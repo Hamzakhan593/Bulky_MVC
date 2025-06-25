@@ -15,6 +15,7 @@
     <div class="card-body p-4">
         <form method="post" class="row" asp-action="edit">
             <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="CategoryId" />
             <div class="border p-3">
                 <div class="row pb-2">
                 </div>
@@ -61,11 +62,16 @@
                 </div>
 
                 <div class="form-floating py-2 col-12">
+                    <label asp-for="ImageURL" class="ms-2"></label>
+                    <input asp-for="ImageURL" type="text" class="form-control border-0 shadow" />
+                    <span asp-validation-for="ImageURL" class="text-bg-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
                     <label asp-for="Price100" class="ms-2"></label>
                     <input asp-for="Price100" type="text" class="form-control border-0 shadow" />
                     <span asp-validation-for="Price100" class="text-bg-danger"></span>
                 </div>
-
 
                 <div class="row pt-2 mt-3">
                     <div class="col-6 col-md-3">
