@@ -6,6 +6,7 @@ using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
@@ -25,11 +26,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productList = _unitOfWork.ProductRepository.GetAll();
-            return View(productList); 
+            return View(productList);
         }
 
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             //IEnumerable<SelectListItem> CList = _db.categories
             //    .Select(c => new SelectListItem
@@ -51,41 +52,68 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 }),
                 Product = new Product()
             };
-            return View(productVM);
-        }
-        [HttpPost]
-        public IActionResult Create(ProductViewModel obj)
-        {
-            if (ModelState.IsValid)
+
+
+            if (id == null || id == 0)
             {
-                _unitOfWork.ProductRepository.Add(obj.Product);
-                _unitOfWork.IUWSave();
-                TempData["success"] = "Category Created Successfully";
-                return RedirectToAction("Index");
+                //create
+                return View(productVM);
             }
-
-            return View();
-        }
-
-
-        public IActionResult Edit(int? id)
-        {
-            Product ProductObj = _unitOfWork.ProductRepository.Get(u=>u.ProductId == id);
-            return View(ProductObj);
-        }
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
+            else
             {
-                _unitOfWork.ProductRepository.Update(obj);
-                _unitOfWork.IUWSave();
-                TempData["success"] = "Category Updated Successfully";
-                return RedirectToAction("Index");
-            }
+                //update
+                productVM.Product = _unitOfWork.ProductRepository
+                    .Get(u => u.CategoryId == id);
+                return View(productVM);
 
-            return View();
+            }
         }
+
+            [HttpPost]
+            public IActionResult Upsert(ProductViewModel obj, IFormFile? file)
+            {
+                if (ModelState.IsValid)
+                {
+                    _unitOfWork.ProductRepository.Add(obj.Product);
+                    _unitOfWork.IUWSave();
+                    TempData["success"] = "Category Created Successfully";
+                    return RedirectToAction("Index");
+                }
+
+                //    else {
+                //         obj.CategoryList = _unitOfWork.CategoryRepository
+                //            .GetAll().Select( u=> new SelectListItem
+                //            {
+                //                Text = u.CategoryName,
+                //                Value = u.CategoryId.ToString()
+                //            });
+                //              return View(obj);
+                //            }
+
+                return View();
+            }
+        
+
+        
+
+        //public IActionResult Edit(int? id)
+        //{
+        //    Product ProductObj = _unitOfWork.ProductRepository.Get(u=>u.ProductId == id);
+        //    return View(ProductObj);
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(Product obj)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _unitOfWork.ProductRepository.Update(obj);
+        //        _unitOfWork.IUWSave();
+        //        TempData["success"] = "Category Updated Successfully";
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View();
+        //}
 
 
 

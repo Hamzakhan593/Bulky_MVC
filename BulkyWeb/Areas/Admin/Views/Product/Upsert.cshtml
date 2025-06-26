@@ -6,14 +6,15 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Create Category</h2>
+                <h2 class="text-white py-2"> @(Model.Product.ProductId !=0? "Update" : "Create") Product</h2>
             </div>
         </div>
     </div>
 
 
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Product.ProductId" hidden />
             <div class="border p-3">
                 <div class="row pb-2">
                 </div>
@@ -23,10 +24,9 @@
                     <input asp-for="Product.Title" type="text" class="form-control border-0 shadow" />
                     <span asp-validation-for="Product.Title" class="text-bg-danger"></span>
                 </div>
-                <div class="form-floating py-2 col-12">
+                <div class="py-2 col-12 text-muted">
                     <label asp-for="Product.Description" class="ms-2"></label>
-                    <input asp-for="Product.Description" type="text" class="form-control border-0 shadow" />
-                    <span asp-validation-for="Product.Description" class="text-bg-danger"></span>
+                    <textarea asp-for="Product.Description" id="descriptionEditor" class="form-control border-0 shadow"></textarea>
                 </div>
 
                 <div class="form-floating py-2 col-12">
@@ -66,8 +66,8 @@
                 </div>
                 <div class="form-floating py-2 col-12">
                     <label asp-for="Product.ImageURL" class="ms-2"></label>
-                    <input asp-for="Product.ImageURL" type="text" class="form-control border-0 shadow" />
-                    <span asp-validation-for="Product.ImageURL" class="text-bg-danger"></span>
+                    <input  type="file" class="form-control border-0 shadow" />
+                    @* <span asp-validation-for="Product.ImageURL" class="text-bg-danger"></span> *@
                 </div>
 
                 <div class="form-floating py-2 col-12">
@@ -80,7 +80,14 @@
 
                 <div class="row pt-2 mt-3">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                        @if (Model.Product.ProductId != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
                     </div>
                     <div class="col-6">
                         <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">
@@ -96,6 +103,25 @@
 
 
 @section scripts {
+
+    <script src="https://cdn.tiny.cloud/1/8miwnb64r220hmd26lam31z3v9q1aspra7fcch010sxa1ziv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#descriptionEditor',
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link charmap preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                      alignleft aligncenter alignright alignjustify | \
+                      bullist numlist outdent indent | removeformat | help'
+        });
+    </script>
+
+
     @{
         <partial name="_ValidationScriptsPartial" />
     }
