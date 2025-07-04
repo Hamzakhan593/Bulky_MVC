@@ -33,7 +33,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
 
         public IActionResult Upsert(int? id)
-        {
+          {
             //IEnumerable<SelectListItem> CList = _db.categories
             //    .Select(c => new SelectListItem
             //    {
@@ -65,7 +65,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 //update
                 productVM.Product = _unitOfWork.ProductRepository
-                    .Get(u => u.CategoryId == id);
+                    .Get(u => u.ProductId == id);
                 return View(productVM);
 
             }
@@ -97,6 +97,18 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     // Step 5: Combine folder path + file name to get the full path
                     string fullPath = Path.Combine(uploadFolder, fileName);
 
+
+                    // updating existing image
+                    if (!string.IsNullOrEmpty(obj.Product.ImageURL))
+                    {
+                        //delete old image
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageURL.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     // Step 6: Save the uploaded file to disk using a FileStream
                     using (var fileStream = new FileStream(fullPath, FileMode.Create))
                     {
@@ -107,8 +119,15 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     obj.Product.ImageURL = @"\images\product\" + fileName;
                 }
 
-
+                    if(obj.Product.ProductId == 0)
+                {
                     _unitOfWork.ProductRepository.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.ProductRepository.Update(obj.Product); 
+                }
+
                     _unitOfWork.IUWSave();
                     TempData["success"] = "Category Created Successfully";
                     return RedirectToAction("Index");
