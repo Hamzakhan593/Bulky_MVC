@@ -177,17 +177,50 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View(ProductObj);
         }
 
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePost(int? id)
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
-            Product obj = _unitOfWork.ProductRepository.Get(u=>u.ProductId==id);    
+            try
+            {
+                var product = _unitOfWork.ProductRepository.Get(u => u.ProductId == id);
+                if (product == null)
+                {
+                    return Json(new { success = false, message = "Product not found" });
+                }
 
-                _unitOfWork.ProductRepository.Remove(obj);
+                // Delete image if exists
+                if (!string.IsNullOrEmpty(product.ImageURL))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                                                 product.ImageURL.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                _unitOfWork.ProductRepository.Remove(product);
                 _unitOfWork.IUWSave();
-            TempData["success"] = "Category Deleted Successfully";
-            return RedirectToAction("Index");
+
+                return Json(new { success = true, message = "Deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
+
+
+        //[HttpPost, ActionName("Delete")]
+        //public IActionResult DeletePost(int? id)
+        //{
+        //    Product obj = _unitOfWork.ProductRepository.Get(u=>u.ProductId==id);    
+
+        //        _unitOfWork.ProductRepository.Remove(obj);
+        //        _unitOfWork.IUWSave();
+        //    TempData["success"] = "Category Deleted Successfully";
+        //    return RedirectToAction("Index");
+        //}
 
         #region API CALLS
 
