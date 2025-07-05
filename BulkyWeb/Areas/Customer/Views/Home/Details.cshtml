@@ -1,98 +1,112 @@
-﻿<form method="post">
-    <div class="card shadow border-0 mt-4">
-        <div class="card-header bg-secondary bg-gradient text-light py-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h3 class="text-white text-uppercase">Title</h3>
-                    <p class="text-white-50 fw-semibold mb-0">by Author</p>
-                </div>
-            </div>
+﻿@model Bulky.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<form method="post">
+    <div class="card border-0 rounded-5 mt-5 px-3 px-md-5 shadow-lg bg-light bg-opacity-75 backdrop-blur">
+        <div class="card-header text-center text-white py-4 rounded-top-5"
+             style="background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <h2 class="fw-bold text-uppercase">@Model.Title</h2>
+            <p class="fst-italic text-light mb-0">by @Model.Author</p>
         </div>
-        <div class="card-body">
-            <div class="py-3">
-                <div class="row">
-                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
-                        <a class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
-                            <small>Back to home</small>
-                        </a>
+
+        <div class="card-body py-5">
+            <div class="row g-5 align-items-start">
+                <!-- Left: Book Image -->
+                <div class="col-md-4 text-center">
+                    <div class="img-container rounded shadow" style="overflow: hidden;">
+                        <img src="@Model.ImageURL" class="img-fluid rounded-4 transition" style="max-height: 380px; object-fit: cover;" />
                     </div>
+                    <span class="badge bg-info text-dark fs-6 mt-3">@Model.Category.CategoryName</span>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-                        <img src="https://placehold.co/500x600" width="100%" class="rounded" />
+
+                <!-- Right: Details -->
+                <div class="col-md-8">
+                    <h6 class="text-muted">ISBN: <span class="fw-semibold text-dark">@Model.ISBN</span></h6>
+
+                    <h6 class="text-muted mb-3">
+                        List Price:
+                        <span class="text-decoration-line-through text-danger">
+                            @Model.ListPrice.ToString("C")
+                        </span>
+                    </h6>
+
+                    <div class="table-responsive mb-4">
+                        <table class="table table-hover text-center align-middle shadow-sm rounded-4 overflow-hidden">
+                            <thead class="table-light">
+                                <tr class="fw-semibold">
+                                    <th><i class="bi bi-box-seam"></i> Quantity</th>
+                                    <th>1 - 50</th>
+                                    <th>51 - 100</th>
+                                    <th>100+</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-success fw-bold fs-6">
+                                    <td><i class="bi bi-tags"></i> Price</td>
+                                    <td>@Model.Price.ToString("C")</td>
+                                    <td>@Model.Price50.ToString("C")</td>
+                                    <td>@Model.Price100.ToString("C")</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-12 col-lg-6 offset-lg-1">
 
-                        <div class="col-12 col-md-6 pb-4">
-                            <span class="badge">Category</span>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50 ">ISBN : ISBN</h6>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50  pb-2">
-                                List Price:
-                                <span class="text-decoration-line-through">
-                                    ListPrice
-                                </span>
-                            </h6>
-                        </div>
-                        <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">Quantity</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">1-50</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">51-100</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">100+</div>
-                            </div>
-                        </div>
-                        <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Price</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Price</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Price50</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Price100</div>
-                            </div>
-                        </div>
-                        <div class="row pl-2 my-3">
-                            <p class="text-secondary lh-sm">Description</p>
-                        </div>
-                        <div class="row pl-2 mb-3">
-                            <div class="col-md-4">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-primary text-white border-0 fw-semibold"
-                                          id="inputGroup-sizing-default">
-                                        Count
-                                    </span>
-                                    <input type="number" value="1" class="form-control text-end"
-                                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                    <p class="text-secondary lh-lg fs-6 mb-4">@Html.Raw(Model.Description)</p>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6 pb-1">
-                                <button type="submit" disabled
-                                        class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    Add to Cart (Comming Soon...)
-                                </button>
+                    <!-- Quantity Input -->
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-5">
+                            <label class="form-label fw-semibold text-dark">Select Quantity</label>
+                            <div class="input-group shadow-sm">
+                                <span class="input-group-text bg-primary text-white fw-semibold border-0">Qty</span>
+                                <input type="number" class="form-control text-end border-0" min="1" value="1" />
                             </div>
                         </div>
                     </div>
 
+                    <!-- Buttons -->
+                    <div class="d-flex flex-column flex-md-row gap-3">
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary rounded-pill fw-semibold px-4 py-2 shadow-sm hover-glow">
+                            ← Back to Home
+                        </a>
+
+                        <button type="submit" class="btn btn-primary bg-gradient fw-semibold text-uppercase px-4 py-2 rounded-pill shadow-sm hover-glow" disabled>
+                            <i class="bi bi-cart-plus me-2"></i> Add to Cart (Coming Soon)
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<!-- Custom Styling -->
+<style>
+    .transition {
+        transition: all 0.4s ease-in-out;
+    }
+
+    .img-container:hover img {
+        transform: scale(1.05);
+    }
+
+    .hover-glow:hover {
+        box-shadow: 0 0 12px rgba(102, 126, 234, 0.6), 0 0 20px rgba(118, 75, 162, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .backdrop-blur {
+        backdrop-filter: blur(6px);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(102, 126, 234, 0.1);
+    }
+</style>
+
+<!-- Bootstrap Icons CDN (for icons if not already included) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">

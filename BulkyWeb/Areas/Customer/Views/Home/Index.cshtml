@@ -38,7 +38,10 @@
                             <span class="text-success">Now @product.Price.ToString("C")</span>
                         </p>
                         <div class="text-center mt-auto">
-                            <a href="Details" class="btn btn-gradient btn-sm px-4 rounded-pill">View Details</a>
+                            <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-productId="@product.ProductId"
+                               class="btn btn-outline-primary btn-sm rounded-pill">
+                                View Details
+                            </a>
                         </div>
                     </div>
                 </div>
