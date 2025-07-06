@@ -16,7 +16,7 @@ namespace Bulky.DataAccess.Resository
         {
             _db = db;
             dbSet = _db.Set<T>();
-        }
+        } 
         public void Add(T entity)
         {
             dbSet.Add(entity);
