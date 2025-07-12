@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Bulky.Models.Company>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.companyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companyStreetAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companyCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companyState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companyPostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.companyphoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyStreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyPostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyphoneNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.companyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.companyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.companyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

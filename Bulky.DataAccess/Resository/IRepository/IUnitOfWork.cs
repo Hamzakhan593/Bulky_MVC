@@ -13,7 +13,8 @@ namespace Bulky.DataAccess.Resository.IRepository
         ICategoryRepository CategoryRepository { get; }
         //IRepository<Product> ProductRespository {  get; }
         IProductRepository ProductRepository { get; }
-            
+        
+        ICompanyRepository CompanyRepository { get; }
         void IUWSave();
     }
 }

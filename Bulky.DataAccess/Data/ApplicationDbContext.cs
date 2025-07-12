@@ -14,11 +14,20 @@ namespace BulkyWeb.DataAccess.Data
 
         public DbSet<Category> categories { get; set; }
         public DbSet<Product> Products  { get; set; }
+        public DbSet<Company> Companys { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { companyId = 1, companyName = "company1", companyStreetAddress = "11 number", companyCity = "sanghar", companyState = "sindh", companyPostalCode = "psc123", companyphoneNumber = "03402696208" },
+                new Company { companyId = 2, companyName = "company2", companyStreetAddress = "12 number", companyCity = "sanghar", companyState = "sindh", companyPostalCode = "psc123", companyphoneNumber = "03402696208" },
+                new Company { companyId = 3, companyName = "company3", companyStreetAddress = "13 number", companyCity = "sanghar", companyState = "sindh", companyPostalCode = "psc123", companyphoneNumber = "03402696208" }
+                );
+
+
             modelBuilder.Entity<Category>().HasData(
 
                 new Category {CategoryId = 1, CategoryName = "Action", CategoryDisplayOrder = 1 },
@@ -112,7 +121,6 @@ namespace BulkyWeb.DataAccess.Data
                     Price100 = 20,
                     CategoryId = 3,
                     ImageURL = ""
-
                 });
         }
     }

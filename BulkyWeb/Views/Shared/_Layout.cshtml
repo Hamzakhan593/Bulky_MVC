@@ -39,6 +39,7 @@
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
+
                         <!-- Dropdown -->
                         @if (User.IsInRole(Static_Details.Role_Admin))
                         {
@@ -55,6 +56,11 @@
                                     <li>
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">
                                             <i class="bi bi-box-seam"></i> Products
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">
+                                            <i class="bi bi-box-seam"></i> Company
                                         </a>
                                     </li>
                                 </ul>

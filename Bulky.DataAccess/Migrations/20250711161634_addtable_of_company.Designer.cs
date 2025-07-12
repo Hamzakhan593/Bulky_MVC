@@ -4,6 +4,7 @@ using BulkyWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulky.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250711161634_addtable_of_company")]
+    partial class addtable_of_company
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,38 +60,6 @@ namespace Bulky.DataAccess.Migrations
                     b.HasKey("companyId");
 
                     b.ToTable("Companys");
-
-                    b.HasData(
-                        new
-                        {
-                            companyId = 1,
-                            companyCity = "sanghar",
-                            companyName = "company1",
-                            companyPostalCode = "psc123",
-                            companyState = "sindh",
-                            companyStreetAddress = "11 number",
-                            companyphoneNumber = "03402696208"
-                        },
-                        new
-                        {
-                            companyId = 2,
-                            companyCity = "sanghar",
-                            companyName = "company2",
-                            companyPostalCode = "psc123",
-                            companyState = "sindh",
-                            companyStreetAddress = "12 number",
-                            companyphoneNumber = "03402696208"
-                        },
-                        new
-                        {
-                            companyId = 3,
-                            companyCity = "sanghar",
-                            companyName = "company3",
-                            companyPostalCode = "psc123",
-                            companyState = "sindh",
-                            companyStreetAddress = "13 number",
-                            companyphoneNumber = "03402696208"
-                        });
                 });
 
             modelBuilder.Entity("Bulky.Models.Product", b =>
