@@ -15,6 +15,8 @@ namespace BulkyWeb.DataAccess.Data
         public DbSet<Category> categories { get; set; }
         public DbSet<Product> Products  { get; set; }
         public DbSet<Company> Companys { get; set; }
+        public DbSet<ShoppingCart> shoppingCarts { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

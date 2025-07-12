@@ -1,15 +1,16 @@
-﻿@model Bulky.Models.Product
+﻿@model Bulky.Models.ShoppingCart
 
 @{
     ViewData["Title"] = "Product Details";
 }
 
 <form method="post">
+    <input type="hidden" asp-for="ProductId"/>
     <div class="card border-0 rounded-5 mt-5 px-3 px-md-5 shadow-lg bg-light bg-opacity-75 backdrop-blur">
         <div class="card-header text-center text-white py-4 rounded-top-5"
              style="background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-            <h2 class="fw-bold text-uppercase">@Model.Title</h2>
-            <p class="fst-italic text-light mb-0">by @Model.Author</p>
+            <h2 class="fw-bold text-uppercase">@Model.Product.Title</h2>
+            <p class="fst-italic text-light mb-0">by @Model.Product.Author</p>
         </div>
 
         <div class="card-body py-5">
@@ -17,19 +18,19 @@
                 <!-- Left: Book Image -->
                 <div class="col-md-4 text-center">
                     <div class="img-container rounded shadow" style="overflow: hidden;">
-                        <img src="@Model.ImageURL" class="img-fluid rounded-4 transition" style="max-height: 380px; object-fit: cover;" />
+                        <img src="@Model.Product.ImageURL" class="img-fluid rounded-4 transition" style="max-height: 380px; object-fit: cover;" />
                     </div>
-                    <span class="badge bg-info text-dark fs-6 mt-3">@Model.Category.CategoryName</span>
+                    <span class="badge bg-info text-dark fs-6 mt-3">@Model.Product.Category.CategoryName</span>
                 </div>
 
                 <!-- Right: Details -->
                 <div class="col-md-8">
-                    <h6 class="text-muted">ISBN: <span class="fw-semibold text-dark">@Model.ISBN</span></h6>
+                    <h6 class="text-muted">ISBN: <span class="fw-semibold text-dark">@Model.Product.ISBN</span></h6>
 
                     <h6 class="text-muted mb-3">
                         List Price:
                         <span class="text-decoration-line-through text-danger">
-                            @Model.ListPrice.ToString("C")
+                            @Model.Product.ListPrice.ToString("C")
                         </span>
                     </h6>
 
@@ -46,15 +47,15 @@
                             <tbody>
                                 <tr class="text-success fw-bold fs-6">
                                     <td><i class="bi bi-tags"></i> Price</td>
-                                    <td>@Model.Price.ToString("C")</td>
-                                    <td>@Model.Price50.ToString("C")</td>
-                                    <td>@Model.Price100.ToString("C")</td>
+                                    <td>@Model.Product.Price.ToString("C")</td>
+                                    <td>@Model.Product.Price50.ToString("C")</td>
+                                    <td>@Model.Product.Price100.ToString("C")</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <p class="text-secondary lh-lg fs-6 mb-4">@Html.Raw(Model.Description)</p>
+                    <p class="text-secondary lh-lg fs-6 mb-4">@Html.Raw(Model.Product.Description)</p>
 
                     <!-- Quantity Input -->
                     <div class="row align-items-center mb-4">
@@ -62,7 +63,7 @@
                             <label class="form-label fw-semibold text-dark">Select Quantity</label>
                             <div class="input-group shadow-sm">
                                 <span class="input-group-text bg-primary text-white fw-semibold border-0">Qty</span>
-                                <input type="number" class="form-control text-end border-0" min="1" value="1" />
+                                <input asp-for="Count" type="number" class="form-control text-end border-0" min="1" value="1" />
                             </div>
                         </div>
                     </div>
@@ -74,8 +75,8 @@
                             ← Back to Home
                         </a>
 
-                        <button type="submit" class="btn btn-primary bg-gradient fw-semibold text-uppercase px-4 py-2 rounded-pill shadow-sm hover-glow" disabled>
-                            <i class="bi bi-cart-plus me-2"></i> Add to Cart (Coming Soon)
+                        <button type="submit" class="btn btn-primary bg-gradient fw-semibold text-uppercase px-4 py-2 rounded-pill shadow-sm hover-glow">
+                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
                         </button>
                     </div>
                 </div>

@@ -18,6 +18,8 @@ namespace Bulky.DataAccess.Resository
 
         public IProductRepository ProductRepository {  get; set; }
         public ICompanyRepository CompanyRepository { get; set; }
+        public IShopingCartRepository ShoppingCartRepository { get; set; }
+        public IApplicationUserRepository ApplicationUserRepository { get; set; }   
 
         //public IRepository<Product> ProductRespository {  get; set; }   
 
@@ -28,6 +30,8 @@ namespace Bulky.DataAccess.Resository
             //ProductRespository = new Repository<Product>(_db);
             ProductRepository = new ProductRepository(_db);
             CompanyRepository = new companyRepository(_db);
+            ShoppingCartRepository = new ShopingCartRepository(_db);
+            ApplicationUserRepository = new ApplicationUserRepository(_db);
         }
 
 
