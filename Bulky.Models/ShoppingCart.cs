@@ -22,7 +22,7 @@ namespace Bulky.Models
         [Range(1, 1000, ErrorMessage = "Please Enter a value between 1 and 100")]
         public int Count { get; set; }
 
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
