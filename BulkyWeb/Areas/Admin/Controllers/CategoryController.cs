@@ -19,7 +19,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public CategoryController(IUnitOfWork unitOfWork)
         {
             _UnitofWork = unitOfWork;
-        }
+        } 
 
         public IActionResult Index()
         {
