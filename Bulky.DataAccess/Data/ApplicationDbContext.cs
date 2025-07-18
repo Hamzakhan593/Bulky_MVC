@@ -17,6 +17,8 @@ namespace BulkyWeb.DataAccess.Data
         public DbSet<Company> Companys { get; set; }
         public DbSet<ShoppingCart> shoppingCarts { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
+        public DbSet<OrderHeader> orderHeaders { get; set; }
+        public DbSet<OrderDetail> orderDetails { get; set; }
 
 
 
