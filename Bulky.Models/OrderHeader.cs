@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Bulky.Models
@@ -12,6 +13,7 @@ namespace Bulky.Models
     public class OrderHeader
     {
         [Key]
+        [JsonPropertyName("id")]  
         public int OrderHeaderId { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
@@ -30,6 +32,7 @@ namespace Bulky.Models
         public DateTime PaymentDate { get; set; }
         public DateOnly PaymentDueDate { get; set; }
 
+        public string? SessionId { get; set; }
         public string? PaymentIntendId { get; set; }
 
 
