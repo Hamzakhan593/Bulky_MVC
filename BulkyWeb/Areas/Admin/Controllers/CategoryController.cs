@@ -81,17 +81,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            //if (obj.CategoryName == obj.CategoryDisplayOrder.ToString())
-            //{
-            //    ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
-            //}
-
-            //if (obj.CategoryName.ToLower() == "text")
-            //{
-            //    ModelState.AddModelError("", "text is invalid");
-            //}
-
-
             if (ModelState.IsValid)
             {
                 _UnitofWork.CategoryRepository.Update(obj);
@@ -126,16 +115,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            //if (obj.CategoryName == obj.CategoryDisplayOrder.ToString())
-            //{
-            //    ModelState.AddModelError("CategoryName", "The display order cannot exactly match the Category Name");
-            //}
-
-            //if (obj.CategoryName.ToLower() == "text")
-            //{
-            //    ModelState.AddModelError("", "text is invalid");
-            //}
-
             Category? obj = _UnitofWork.CategoryRepository.Get(u => u.CategoryId == id);
             if (obj == null)
             {

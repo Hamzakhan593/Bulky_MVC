@@ -36,7 +36,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
 
         public IActionResult Upsert(int? id)
-          {
+        {
             //IEnumerable<SelectListItem> CList = _db.categories
             //    .Select(c => new SelectListItem
             //    {
@@ -44,7 +44,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
             //        Value = c.CategoryId.ToString()
             //    });
             //ViewBag.CategoryList = CategoryList;
-
 
 
             ProductViewModel productVM = new()
@@ -74,11 +73,12 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
         }
 
-            [HttpPost]
-            public IActionResult Upsert(ProductViewModel obj, IFormFile? file)
+
+        [HttpPost]
+        public IActionResult Upsert(ProductViewModel obj, IFormFile? file)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
 
                 if (file != null && file.Length > 0)
                 {
@@ -122,56 +122,22 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     obj.Product.ImageURL = @"\images\product\" + fileName;
                 }
 
-                    if(obj.Product.ProductId == 0)
+                if (obj.Product.ProductId == 0)
                 {
                     _unitOfWork.ProductRepository.Add(obj.Product);
                 }
                 else
                 {
-                    _unitOfWork.ProductRepository.Update(obj.Product); 
+                    _unitOfWork.ProductRepository.Update(obj.Product);
                 }
 
-                    _unitOfWork.IUWSave();
-                    TempData["success"] = "Category Created Successfully";
-                    return RedirectToAction("Index");
-                }
-
-                //    else {
-                //         obj.CategoryList = _unitOfWork.CategoryRepository
-                //            .GetAll().Select( u=> new SelectListItem
-                //            {
-                //                Text = u.CategoryName,
-                //                Value = u.CategoryId.ToString()
-                //            });
-                //              return View(obj);
-                //            }
-
-                return View();
+                _unitOfWork.IUWSave();
+                TempData["success"] = "Category Created Successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
             }
         
-
-        
-
-        //public IActionResult Edit(int? id)
-        //{
-        //    Product ProductObj = _unitOfWork.ProductRepository.Get(u=>u.ProductId == id);
-        //    return View(ProductObj);
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(Product obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _unitOfWork.ProductRepository.Update(obj);
-        //        _unitOfWork.IUWSave();
-        //        TempData["success"] = "Category Updated Successfully";
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View();
-        //}
-
-
 
         public IActionResult Delete(int? id)
         {
@@ -193,8 +159,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 // Delete image if exists
                 if (!string.IsNullOrEmpty(product.ImageURL))
                 {
-                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath,
-                                                 product.ImageURL.TrimStart('\\'));
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.ImageURL.TrimStart('\\'));
                     if (System.IO.File.Exists(oldImagePath))
                     {
                         System.IO.File.Delete(oldImagePath);
@@ -211,18 +176,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-
-
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeletePost(int? id)
-        //{
-        //    Product obj = _unitOfWork.ProductRepository.Get(u=>u.ProductId==id);    
-
-        //        _unitOfWork.ProductRepository.Remove(obj);
-        //        _unitOfWork.IUWSave();
-        //    TempData["success"] = "Category Deleted Successfully";
-        //    return RedirectToAction("Index");
-        //}
 
         #region API CALLS
 

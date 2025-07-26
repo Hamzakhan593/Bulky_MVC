@@ -13,9 +13,5 @@ namespace Bulky.Models.ViewModel
     {
         public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
         public OrderHeader OrderHeader { get; set; }
-        //public int CompanyId { get; set; }
-        //[ForeignKey(nameof(CompanyId))]
-        //[ValidateNever]
-        //public Company Company { get; set; }
     }
 }
