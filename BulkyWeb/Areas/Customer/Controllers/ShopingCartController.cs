@@ -40,8 +40,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 cart.Price = GetPriceBasedOnQuantity(cart);
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Price * cart.Count;
             }
-
-
             return View(ShoppingCartVM);
         }
 
