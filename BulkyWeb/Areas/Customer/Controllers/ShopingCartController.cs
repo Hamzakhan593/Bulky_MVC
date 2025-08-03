@@ -205,6 +205,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                     _unitOfWork.IUWSave();
                 }
             }
+            HttpContext.Session.Clear();
 
             // Clear the shopping cart
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCartRepository
@@ -240,6 +241,9 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             if (cartFromDb.Count <= 1)
             {
+                HttpContext.Session.SetInt32(Static_Details.SessionCart,
+               _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId
+                == cartFromDb.ApplicationUserId).Count() - 1);
                 _unitOfWork.ShoppingCartRepository.Remove(cartFromDb);
             }
             else
@@ -260,6 +264,10 @@ namespace BulkyWeb.Areas.Customer.Controllers
             {
                 return NotFound();
             }
+
+            HttpContext.Session.SetInt32(Static_Details.SessionCart,
+            _unitOfWork.ShoppingCartRepository.GetAll(u=>u.ApplicationUserId
+            ==cartFromDb.ApplicationUserId).Count()-1);
 
             _unitOfWork.ShoppingCartRepository.Remove(cartFromDb);
             _unitOfWork.IUWSave();

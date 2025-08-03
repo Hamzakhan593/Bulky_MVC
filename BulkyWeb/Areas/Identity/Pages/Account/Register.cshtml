@@ -1,7 +1,14 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Create Account";
+    if (User.IsInRole(Static_Details.Role_Admin))
+    {
+        ViewData["Title"] = "Register - ADMIN PORTAL";
+    }
+    else
+    {
+        ViewData["Title"] = "Register";
+    }
 }
 
 <div class="container mt-5">
@@ -9,6 +16,7 @@
         <div class="col-md-8 col-lg-6">
             <div class="card shadow-lg border-0 rounded-4">
                 <div class="card-body px-5 py-4">
+
                     <h2 class="text-center text-gradient mb-4">@ViewData["Title"]</h2>
 
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -69,13 +77,39 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
 
-                        <div class="form-floating mb-4">
-                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                                <option disabled selected>-- Select Role --</option>
-                            </select>
-                            <label asp-for="Input.Role">Register As</label>
-                            <span asp-validation-for="Input.Role" class="text-danger"></span>
-                        </div>
+
+                         @if (User.IsInRole(Static_Details.Role_Admin)) 
+                        {
+                            <div class="form-floating mb-4">
+                                <select id="roleDropdown" asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                    <option disabled selected>-- Select Role --</option>
+                                </select>
+                                <label asp-for="Input.Role">Register As</label>
+                                <span asp-validation-for="Input.Role" class="text-danger"></span>
+                            </div>
+
+                            <div id="companyDropdownWrapper" class="form-floating mb-4" style="display: none;">
+                                <select asp-for="Input.CompanyId" asp-items="Model.Input.CompanyList" class="form-select">
+                                    <option disabled selected>-- Select Company --</option>
+                                </select>
+                                <label asp-for="Input.CompanyId">Select Company</label>
+                                <span asp-validation-for="Input.CompanyId" class="text-danger"></span>
+                            </div>
+                        }
+
+
+
+                        @* @if (User.IsInRole(Static_Details.Role_Admin))
+                        {
+                            <div class="form-floating mb-4">
+                                <select asp-for="Input.CompanyId" asp-items="Model.Input.CompanyList" class="form-select">
+                                    <option disabled selected>-- Select Company --</option>
+                                </select>
+                                <label asp-for="Input.CompanyId">Select Company</label>
+                                <span asp-validation-for="Input.CompanyId" class="text-danger"></span>
+                            </div>
+                        } *@
+
 
                         <button type="submit" class="btn btn-gradient w-100 py-2 mb-3">Create Account</button>
                     </form>
@@ -107,6 +141,26 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const roleDropdown = document.getElementById("roleDropdown");
+        const companyWrapper = document.getElementById("companyDropdownWrapper");
+
+        function toggleCompanyDropdown() {
+            if (roleDropdown.value === "Company") {
+                companyWrapper.style.display = "block";
+            } else {
+                companyWrapper.style.display = "none";
+            }
+        }
+
+        // Initial toggle in case form posts back
+        toggleCompanyDropdown();
+
+        roleDropdown.addEventListener("change", toggleCompanyDropdown);
+    });
+</script>
 
 <style>
     .btn-gradient {

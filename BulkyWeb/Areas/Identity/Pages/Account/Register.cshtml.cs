@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Bulky.DataAccess.Resository.IRepository;
 using Bulky.Models;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authentication;
@@ -34,6 +35,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _unitOfWork; 
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -41,8 +43,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork unitOfWork            
+            )
         {
+             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
              _userManager = userManager;
             _userStore = userStore;
@@ -50,6 +55,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+
         }
 
         /// <summary>
@@ -116,6 +122,9 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             public string? City { get; set; }
             public string? PostalCode { get; set; }
             public string? State { get; set; }
+            public int? CompanyId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
 
         }
 
@@ -139,8 +148,14 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
-                }) 
+                }),
+                CompanyList = _unitOfWork.CompanyRepository.GetAll().Select(c => new SelectListItem
+                {
+                    Text = c.companyName,
+                    Value = c.companyId.ToString()
+                })
             };
+
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -165,9 +180,15 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.State = Input.State;
                 user.City = Input.City;
                 user.StreetAddress = Input.StreetAddress;
+                user.CompanyId = Input.CompanyId; 
                 user.PostalCode = Input.PostalCode;
 
 
+                if (Input.Role == Static_Details.Role_Company && Input.CompanyId == null)
+                {
+                    ModelState.AddModelError("Input.CompanyId", "Please select a company for Company role.");
+                    return Page();
+                }
 
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -188,7 +209,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
 
 
                     // Re-sign in to refresh role claims
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
 
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -207,6 +228,13 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
+
+                    if (User.IsInRole(Static_Details.Role_Admin))
+                    {
+                        TempData["success"] = "New User Created Successfully";
+                        return RedirectToAction("Index", "Home", new { area = "Customer" });
+                    }
+
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);

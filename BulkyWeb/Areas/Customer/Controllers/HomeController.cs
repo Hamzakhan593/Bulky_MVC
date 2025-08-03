@@ -1,12 +1,14 @@
-using System.Diagnostics;
-using System.Security.Claims;
 using Bulky.DataAccess.Resository;
 using Bulky.DataAccess.Resository.IRepository;
 using Bulky.Models;
+using Bulky.Utility;
 using BulkyWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BulkyWeb.Areas.Customer.Controllers
 {
@@ -26,6 +28,14 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
+            // showed element in the cart
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var clam = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if (clam != null)
+            {
+                HttpContext.Session.SetInt32(Static_Details.SessionCart,
+                _unitOfWork.ShoppingCartRepository.GetAll(x => x.ApplicationUserId == clam.Value).Count());
+            }
             IEnumerable<Product> productList = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category");
             return View(productList);
         }
@@ -54,18 +64,23 @@ namespace BulkyWeb.Areas.Customer.Controllers
             ShoppingCart cartFromDb = _unitOfWork.ShoppingCartRepository.Get(x => x.ApplicationUserId == userId
             && x.ProductId == shoppingCart.ProductId);
 
-            if(cartFromDb == null)
+            if (cartFromDb == null)
             {
                 // cart not exist
                 _unitOfWork.ShoppingCartRepository.Add(shoppingCart);
+                _unitOfWork.IUWSave();
+                HttpContext.Session.SetInt32(Static_Details.SessionCart,
+                    _unitOfWork.ShoppingCartRepository.GetAll(x => x.ApplicationUserId == userId).Count());
             }
             else
             {
+                //shopping cart exist
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCartRepository.Update(cartFromDb);
+                _unitOfWork.IUWSave();
+                
             }
-
-            _unitOfWork.IUWSave();
+            TempData["success"] = "Cart updated successfully";
 
             return RedirectToAction(nameof(Index));
         }
