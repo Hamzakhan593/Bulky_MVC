@@ -1,17 +1,19 @@
-﻿@if (TempData["success"] != null)
+﻿@* _Notification.cshtml *@
+@if (TempData["success"] != null || TempData["error"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript">
-    toastr.success('@TempData["success"]');
-    </script>
-}
+        $(document).ready(function () {
+            @if (TempData["success"] != null)
+            {
+                    <text>toastr.success('@TempData["success"]');</text>
+            }
 
-@if (TempData["error"] != null)
-{
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script type="text/javascript">
-        toastr.success('@TempData["success"]');
+            @if (TempData["error"] != null)
+            {
+                    <text>toastr.error('@TempData["error"]');</text>
+            }
+        });
     </script>
 }

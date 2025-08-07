@@ -1,15 +1,34 @@
 ﻿@model int
 
-<div class="container row pt-4">
+<div class="container d-flex flex-column align-items-center justify-content-center py-5">
 
-    <div class="col-12 text-center">
-        <h1 class="text-primary text-center">Order placed Successfully</h1>
-        Your Order Number is : @Model <br /><br />
-        <img src="/images/lawn_leaf.jpg" width="75%" />
+    <!-- Success Icon / Title -->
+    <div class="text-center mb-4">
+        <h1 class="text-success fw-bold mb-2">✅ Order Placed Successfully</h1>
+        <h5 class="text-muted">Thank you for your purchase!</h5>
     </div>
-    <div class="col-12 text-center" style="color:maroon">
-        <br />
-        Your Order has been placed successflly!<br />
+
+    <!-- Order Number -->
+    <div class="text-center mb-4">
+        <p class="fs-5">
+            📦 Your Order Number is:
+            <span class="fw-bold text-primary">@Model</span>
+        </p>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-4">
+        <img src="/images/lawn_leaf.jpg" class="img-fluid rounded shadow-sm" style="max-width: 600px;" alt="Order Success Image" />
+    </div>
+
+    <!-- Confirmation Text -->
+    <div class="text-center">
+        <p class="text-secondary fs-6">
+            Your order has been placed successfully. You will receive a confirmation email shortly.
+        </p>
+        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary mt-3 px-4 py-2 shadow-sm">
+            ⬅ Back to Home
+        </a>
     </div>
 
 </div>

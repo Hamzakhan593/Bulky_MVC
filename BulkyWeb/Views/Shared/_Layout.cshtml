@@ -23,84 +23,173 @@
 <body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        padding: 1.2rem 0;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    ">
             <div class="container">
-                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">BulkyWeb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Brand with smooth hover effect -->
+                <a class="navbar-brand fw-bold fs-3 text-white d-flex align-items-center"
+                   asp-area="" asp-controller="Home" asp-action="Index"
+                   style="transition: all 0.3s ease;">
+                    <i class="bi bi-shop-window me-2" style="font-size: 1.5rem;"></i>
+                    <span class="d-none d-sm-inline">BulkyWeb</span>
+                </a>
+
+                <!-- Larger toggle button with animation -->
+                <button class="navbar-toggler py-2 px-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                        style="transition: all 0.3s ease;"
+                        aria-controls="mainNavbar" aria-expanded="false"
+                        aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="mainNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 1.15rem;">
+                        <!-- Nav items with hover effects -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-white px-3 py-2 rounded-3 d-flex align-items-center"
+                               style="transition: all 0.2s ease;"
+                               asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door me-2"></i>
+                                <span class="nav-link-text">Home</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-white px-3 py-2 rounded-3 d-flex align-items-center"
+                               style="transition: all 0.2s ease;"
+                               asp-area="Admin" asp-controller="Order" asp-action="Index">
+                                <i class="bi bi-clipboard-data me-2"></i>
+                                <span class="nav-link-text">Orders</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-white px-3 py-2 rounded-3 d-flex align-items-center"
+                               style="transition: all 0.2s ease;"
+                               asp-area="Customer" asp-controller="Home" asp-action="Privacy">
+                                <i class="bi bi-shield-lock me-2"></i>
+                                <span class="nav-link-text">Privacy</span>
+                            </a>
                         </li>
 
-
-                        <!-- Dropdown -->
-                         @if (User.IsInRole(Static_Details.Role_Admin)) 
+                        @if (User.IsInRole(Static_Details.Role_Admin))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                    Content Management
+                            <!-- Enhanced Admin Dropdown -->
+                            <li class="nav-item dropdown mx-1">
+                                <a class="nav-link dropdown-toggle text-white px-3 py-2 rounded-3 d-flex align-items-center"
+                                   style="transition: all 0.2s ease;"
+                                   href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-gear me-2"></i>
+                                    <span class="nav-link-text">Admin Panel</span>
                                 </a>
-                                <ul class="dropdown-menu shadow-sm">
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow-lg"
+                                    style="border-radius: 12px; border: none; min-width: 220px;">
                                     <li>
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">
-                                            <i class="bi bi-tags"></i> Category
+                                        <a class="dropdown-item py-2 px-3 d-flex align-items-center"
+                                           style="transition: all 0.2s ease;"
+                                           asp-area="Admin" asp-controller="Category" asp-action="Index">
+                                            <i class="bi bi-tags me-2"></i> Categories
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">
-                                            <i class="bi bi-box-seam"></i> Products
+                                        <a class="dropdown-item py-2 px-3 d-flex align-items-center"
+                                           style="transition: all 0.2s ease;"
+                                           asp-area="Admin" asp-controller="Product" asp-action="Index">
+                                            <i class="bi bi-box-seam me-2"></i> Products
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">
-                                            <i class="bi bi-box-seam"></i> Company
+                                        <a class="dropdown-item py-2 px-3 d-flex align-items-center"
+                                           style="transition: all 0.2s ease;"
+                                           asp-area="Admin" asp-controller="Company" asp-action="Index">
+                                            <i class="bi bi-building me-2"></i> Companies
                                         </a>
                                     </li>
+                                    <li><hr class="dropdown-divider my-2 mx-3"></li>
                                     <li>
-                                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">
-                                            <i class="bi bi-box-seam"></i> Create User
+                                        <a class="dropdown-item py-2 px-3 d-flex align-items-center"
+                                           style="transition: all 0.2s ease;"
+                                           asp-area="Identity" asp-page="/Account/Register">
+                                            <i class="bi bi-person-plus me-2"></i> Create User
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                         } 
-                        @if (httpContextAccessor.HttpContext.Session.GetInt32(Static_Details.SessionCart) != null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Customer" asp-controller="Shopingcart" asp-action="index">
-                                    <i class="bi bi-cart"></i> &nbsp;
-                                    (@httpContextAccessor.HttpContext.Session.GetInt32(Static_Details.SessionCart))
-                                </a>
-                            </li>
                         }
-                        
-                        else{
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Shopingcart" asp-action="index">
-                                <i class="bi bi-cart"></i> &nbsp;
-                                (0)
+
+                        <!-- Cart with animated badge -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-white position-relative px-3 py-2 rounded-3 d-flex align-items-center"
+                               style="transition: all 0.2s ease;"
+                               asp-area="Customer" asp-controller="Shopingcart" asp-action="Index">
+                                <i class="bi bi-cart3 me-2"></i>
+                                <span class="nav-link-text">Cart</span>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                      style="
+                                    font-size: 0.75rem;
+                                    padding: 0.4em 0.6em;
+                                    transition: all 0.3s ease;
+                                    transform: scale(1);
+                                 ">
+                                    @((httpContextAccessor.HttpContext.Session.GetInt32(Static_Details.SessionCart) ?? 0))
+                                </span>
                             </a>
                         </li>
-                        }
                     </ul>
-                    <partial name="_LoginPartial"/>
+
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Body -->
+    <style>
+        /* Hover effects */
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .nav-link:hover, .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-2px);
+        }
+
+            .nav-link:hover .nav-link-text {
+                transform: translateX(3px);
+            }
+
+        .nav-link-text {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        /* Cart badge animation */
+        .nav-link:hover .badge {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 2px 8px rgba(247, 37, 133, 0.4);
+        }
+
+        /* Mobile optimizations */
+        @@ media (max-width: 992px) {
+            .navbar-nav
+
+        {
+            padding-top: 1rem;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0 !important;
+        }
+
+        .nav-link {
+            padding-left: 1rem !important;
+        }
+
+        
+    </style>    <!-- Body -->
     <div class="container my-4 flex-grow-1">
         <partial name="_Notification" />
         <main role="main">
@@ -109,13 +198,123 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white mt-auto py-3">
-        <div class="container text-center small">
-            Made with <i class="bi bi-heart-fill text-danger"></i> by <strong>Hamza Khan</strong> |
-            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white text-decoration-underline">Privacy</a>
+    <footer class="text-white mt-auto" style="
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.1);
+    padding: 2rem 0;
+">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <!-- Footer Brand (matches header) -->
+                    <div class="mb-4">
+                        <a class="d-inline-flex align-items-center text-white text-decoration-none"
+                           asp-area="" asp-controller="Home" asp-action="Index"
+                           style="font-size: 1.5rem; font-weight: 700;">
+                            <i class="bi bi-shop-window me-2"></i>
+                            <span>BulkyWeb</span>
+                        </a>
+                    </div>
+
+                    <!-- Footer Links -->
+                    <div class="d-flex flex-wrap justify-content-center gap-4 mb-4" style="font-size: 1.1rem;">
+                        <a class="text-white text-decoration-none d-flex align-items-center"
+                           asp-area="Customer" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-door me-2"></i> Home
+                        </a>
+                        <a class="text-white text-decoration-none d-flex align-items-center"
+                           asp-area="Admin" asp-controller="Order" asp-action="Index">
+                            <i class="bi bi-clipboard-data me-2"></i> Orders
+                        </a>
+                        <a class="text-white text-decoration-none d-flex align-items-center"
+                           asp-area="Customer" asp-controller="Home" asp-action="Privacy">
+                            <i class="bi bi-shield-lock me-2"></i> Privacy
+                        </a>
+                        <a class="text-white text-decoration-none d-flex align-items-center"
+                           href="mailto:support@bulkyweb.com">
+                            <i class="bi bi-envelope me-2"></i> Contact
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <a href="#" class="text-white" style="font-size: 1.5rem;">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white" style="font-size: 1.5rem;">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" class="text-white" style="font-size: 1.5rem;">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white" style="font-size: 1.5rem;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+
+                    <!-- Copyright & Credits -->
+                    <div class="small">
+                        <div class="mb-2">
+                            Made with <i class="bi bi-heart-fill text-danger" style="font-size: 1.1em;"></i>
+                            by <strong>Hamza Khan</strong>
+                        </div>
+                        <div>
+                            &copy; @DateTime.Now.Year BulkyWeb -
+                            <a asp-area="" asp-controller="Home" asp-action="Privacy"
+                               class="text-white text-decoration-underline">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <style>
+        /* Hover effects matching header */
+        footer a {
+            transition: all 0.3s ease;
+        }
+
+            footer a:hover {
+                color: rgba(255, 255, 255, 0.8) !important;
+                transform: translateY(-2px);
+            }
+
+        .bi-heart-fill {
+            animation: pulse 1.5s infinite;
+        }
+
+        @@ keyframes pulse {
+            0%
+
+        {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+
+        }
+
+        /* Responsive adjustments */
+        @@ media (max-width: 768px) {
+            .d-flex.flex-wrap
+
+        {
+            gap: 1rem !important;
+        }
+
+        footer {
+            padding: 1.5rem 0 !important;
+        }
+
+        }
+    </style>
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
