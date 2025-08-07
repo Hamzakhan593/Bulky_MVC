@@ -11,7 +11,10 @@ using Stripe.Checkout;
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = Static_Details.Role_Admin)]
+    [Authorize(Roles = Static_Details.Role_Admin + "," +
+                    Static_Details.Role_Employee + "," +
+                    Static_Details.Role_Customer + "," +
+                    Static_Details.Role_Company)]
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

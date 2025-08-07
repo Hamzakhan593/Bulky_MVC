@@ -1,59 +1,70 @@
 ﻿@model Bulky.Models.Company
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Company";
 }
 
-<h1>Edit</h1>
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary bg-gradient text-white py-3">
+            <h4 class="text-center mb-0">Edit Company</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="companyId" />
 
-<h4>Company</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="companyId" />
-            <div class="form-group">
-                <label asp-for="companyName" class="control-label"></label>
-                <input asp-for="companyName" class="form-control" />
-                <span asp-validation-for="companyName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="companyStreetAddress" class="control-label"></label>
-                <input asp-for="companyStreetAddress" class="form-control" />
-                <span asp-validation-for="companyStreetAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="companyCity" class="control-label"></label>
-                <input asp-for="companyCity" class="form-control" />
-                <span asp-validation-for="companyCity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="companyState" class="control-label"></label>
-                <input asp-for="companyState" class="form-control" />
-                <span asp-validation-for="companyState" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="companyPostalCode" class="control-label"></label>
-                <input asp-for="companyPostalCode" class="form-control" />
-                <span asp-validation-for="companyPostalCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="companyphoneNumber" class="control-label"></label>
-                <input asp-for="companyphoneNumber" class="form-control" />
-                <span asp-validation-for="companyphoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="companyName" class="form-label"></label>
+                    <input asp-for="companyName" class="form-control" />
+                    <span asp-validation-for="companyName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="companyStreetAddress" class="form-label"></label>
+                    <input asp-for="companyStreetAddress" class="form-control" />
+                    <span asp-validation-for="companyStreetAddress" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="companyCity" class="form-label"></label>
+                    <input asp-for="companyCity" class="form-control" />
+                    <span asp-validation-for="companyCity" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="companyState" class="form-label"></label>
+                    <input asp-for="companyState" class="form-control" />
+                    <span asp-validation-for="companyState" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="companyPostalCode" class="form-label"></label>
+                    <input asp-for="companyPostalCode" class="form-control" />
+                    <span asp-validation-for="companyPostalCode" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="companyphoneNumber" class="form-label"></label>
+                    <input asp-for="companyphoneNumber" class="form-control" />
+                    <span asp-validation-for="companyphoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Back to List
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save2"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
