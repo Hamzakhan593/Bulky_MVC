@@ -131,7 +131,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 // stripe logic
                 StripeConfiguration.ApiKey = "sk_test_51RmH2AIAel1J6g0wfBRX2jWqbIqoruunjcZAFUNLYWivAYrAm4wK70cGz5qFGH2ypKyMXUSJpGXAprAePD6xOsrg00BCtJ7l3b";
 
-                var domain = "https://localhost:7267";  // No trailing slash
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";  // No trailing slash
                 var options = new Stripe.Checkout.SessionCreateOptions
                 {
                     SuccessUrl = domain + $"/customer/shopingcart/orderconfirmation?id={ShoppingCartVM.OrderHeader.OrderHeaderId}",
