@@ -125,14 +125,16 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 if (obj.Product.ProductId == 0)
                 {
                     _unitOfWork.ProductRepository.Add(obj.Product);
+                    TempData["success"] = "Category Created Successfully";
                 }
                 else
                 {
                     _unitOfWork.ProductRepository.Update(obj.Product);
+                    TempData["success"] = "Category updated Successfully";
+
                 }
 
                 _unitOfWork.IUWSave();
-                TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
             return View();
