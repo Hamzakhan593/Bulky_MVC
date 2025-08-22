@@ -52,28 +52,36 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddRazorPages();
 
-// ------------------- OpenAI Chatbot Config ------------------- //
-// Read API Key from config (appsettings.json or Azure AppSettings)
-// Read config
-string? apiKey = builder.Configuration["OpenRouter:ApiKey"];
-string? baseUrl = builder.Configuration["OpenRouter:BaseUrl"];
+// ------------------- OpenRouter Chatbot Config ------------------- //
+// Read API Key and BaseUrl from configuration
+// Locally: appsettings.Development.json or appsettings.json
+// Azure: App Service Application Settings
+var apiKey = builder.Configuration["OpenRouter:ApiKey"];
+var baseUrl = builder.Configuration["OpenRouter:BaseUrl"];
 
-if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(baseUrl))
+// Register HttpClient for OpenRouter safely
+builder.Services.AddHttpClient("OpenRouter", client =>
 {
-    Console.WriteLine("WARNING: OpenRouter API key or BaseUrl not found. Chat functionality will be disabled.");
-    builder.Services.AddSingleton<HttpClient>(_ => null!);
-}
-else
-{
-    // Register HttpClient for OpenRouter
-    builder.Services.AddHttpClient("OpenRouter", client =>
+    if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(baseUrl))
+    {
+        // Dummy URL to avoid DI failure
+        client.BaseAddress = new Uri("https://example.com");
+    }
+    else
     {
         client.BaseAddress = new Uri(baseUrl);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-        client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:5000"); // required by OpenRouter
-        client.DefaultRequestHeaders.Add("X-Title", "Hamza Bookstore Bot");        // optional, app name
-    });
-}
+
+        // Choose correct Referer based on environment
+        var referer = builder.Environment.IsDevelopment()
+            ? "http://localhost:5000"
+            : "https://https://bookstorehamza-apc8cfbqgpa8h3bv.southeastasia-01.azurewebsites.net/";
+
+        client.DefaultRequestHeaders.Add("HTTP-Referer", referer);
+        client.DefaultRequestHeaders.Add("X-Title", "Hamza Bookstore Bot");
+    }
+});
+
 
 // ------------------- Build App ------------------- //
 var app = builder.Build();
