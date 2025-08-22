@@ -65,6 +65,16 @@
                                 <span class="nav-link-text">Orders</span>
                             </a>
                         </li>
+
+                        <li class="nav-item mx-1">
+                            <a class="nav-link text-white px-3 py-2 rounded-3 d-flex align-items-center"
+                               href="javascript:void(0);" id="chatToggle">
+                                <i class="bi bi-chat-dots me-2"></i>
+                                <span class="nav-link-text">Customer Support</span>
+                            </a>
+                        </li>
+
+
                         <li class="nav-item mx-1">
                             <a class="nav-link text-white px-3 py-2 rounded-3 d-flex align-items-center"
                                style="transition: all 0.2s ease;"
@@ -268,6 +278,85 @@
             </div>
         </div>
     </footer>
+
+    <!-- Chat bubble -->
+    <div id="bot" style="position:fixed; right:20px; bottom:20px; width:340px; max-height:70vh;
+     background:#fff; border:1px solid #ddd; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,.1);
+     display:none; flex-direction:column; overflow:hidden; font-family:system-ui,Segoe UI,Arial; z-index:9999;">
+        <div style="padding:12px 14px; font-weight:600; border-bottom:1px solid #eee;">
+            📚 Bookstore Assistant
+        </div>
+
+        <div id="msgs" style="padding:12px; overflow:auto; flex:1;"></div>
+
+        <div style="display:flex; gap:8px; padding:10px; border-top:1px solid #eee;">
+            <input id="msg" placeholder="Ask about orders, shipping, returns..." autocomplete="off"
+                   style="flex:1; padding:10px; border:1px solid #ddd; border-radius:10px;">
+            <button id="send" style="padding:10px 14px; border:none; border-radius:10px; background:#111; color:#fff;">Send</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        const msgs = document.getElementById('msgs');
+        const input = document.getElementById('msg');
+        const sendBtn = document.getElementById('send');
+        const botDiv = document.getElementById('bot');
+        const toggleBtn = document.getElementById('chatToggle');
+
+        // Toggle chat bubble on header button click
+        toggleBtn.onclick = () => {
+            botDiv.style.display = botDiv.style.display === 'none' ? 'flex' : 'none';
+        };
+
+        function addBubble(text, who) {
+            const wrap = document.createElement('div');
+            wrap.style.margin = '6px 0';
+            wrap.style.display = 'flex';
+            wrap.style.justifyContent = who === 'me' ? 'flex-end' : 'flex-start';
+            const b = document.createElement('div');
+            b.textContent = text;
+            b.style.maxWidth = '80%';
+            b.style.padding = '10px 12px';
+            b.style.borderRadius = '12px';
+            b.style.border = '1px solid #eee';
+            b.style.background = who === 'me' ? '#eef6ff' : '#f7f7f8';
+            wrap.appendChild(b);
+            msgs.appendChild(wrap);
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+
+        async function ask() {
+            const text = input.value.trim();
+            if (!text) return;
+            addBubble(text, 'me');
+            input.value = '';
+            addBubble('…', 'bot');
+
+            try {
+                const res = await fetch('/api/chat/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                msgs.lastChild.remove(); // remove typing
+                if (data.reply) addBubble(data.reply, 'bot');
+                else addBubble(data.error || 'Sorry, something went wrong.', 'bot');
+            } catch {
+                msgs.lastChild.remove();
+                addBubble('Network error. Please try again.', 'bot');
+            }
+        }
+
+        sendBtn.onclick = ask;
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') ask(); });
+
+        // initial welcome
+        addBubble('Hi! Ask me about orders, shipping, returns, payments, or books.', 'bot');
+    </script>
+
 
     <style>
         /* Hover effects matching header */
