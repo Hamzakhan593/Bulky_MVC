@@ -54,18 +54,54 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 ---
 ## 📷 Screenshots  
 
-![Homepage](./Assets/HomePage.png)  
-![Cart Page](./Assets/cart.png)  
-![Order Page](./Assets/orderlist.png)  
-![AI Chatbot](./Assets/chatbot.png)  
-![Admin Panel](./Assets/adminpanel.png)  
-![Admin Portal](./Assets/adminportal.png)  
-![Product](./Assets/product.png)  
-![Shipping Details](./Assets/shippingdetails.png)  
-![Book Category](./Assets/bookcategory.png)  
-![Company](./Assets/Company.png)  
-![Payment Integration](./Assets/paynentintegration.png)  
-![PayPal](./Assets/paypal.png)
+### Homepage
+![Homepage](./BulkyWeb/screenshots/HomePage.png)  
+This is the homepage of the bookstore website, showcasing the layout and initial product listings.
+
+### Cart Page
+![Cart Page](./BulkyWeb/screenshots/cart.png)  
+This is the cart page where users can view and manage the products they’ve added to their cart.
+
+### Order Page
+![Order Page](./BulkyWeb/screenshots/orderlist.png)  
+This is the order page where users can review their orders and checkout.
+
+### AI Chatbot
+![AI Chatbot](./BulkyWeb/screenshots/chatbot.png)  
+The AI chatbot that assists users with their queries and recommendations on the site.
+
+### Admin Panel
+![Admin Panel](./BulkyWeb/screenshots/adminpanel.png)  
+This is the admin panel where the website’s admin can manage products, users, and orders.
+
+### Admin Portal
+![Admin Portal](./BulkyWeb/screenshots/adminportal.png)  
+The admin portal where all backend management tasks are handled, including user and product management.
+
+### Product
+![Product](./BulkyWeb/screenshots/product.png)  
+This shows a detailed view of a specific product page, including descriptions, pricing, and availability.
+
+### Shipping Details
+![Shipping Details](./BulkyWeb/screenshots/shippingdetails.png)  
+This page allows users to enter their shipping information to complete the checkout process.
+
+### Book Category
+![Book Category](./BulkyWeb/screenshots/bookcategory.png)  
+Here, users can browse books by category.
+
+### Company
+![Company](./BulkyWeb/screenshots/Company.png)  
+This is the company information page, providing details about the bookstore.
+
+### Payment Integration
+![Payment Integration](./BulkyWeb/screenshots/paynentintegration.png)  
+This page shows the integration of payment methods, allowing users to complete their purchase.
+
+### PayPal
+![PayPal](./BulkyWeb/screenshots/paypal.png)  
+The PayPal payment gateway for users to securely complete their transactions.
+
 
 ---
 
