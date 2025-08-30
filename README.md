@@ -55,18 +55,18 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 
 ## 📷 Screenshots  
 
-![Homepage](Asset/HomePage.png)  
-![Cart Page](Asset/cart.png)  
-![order Page](Asset/orderlist.png)  
-![AI Chatbot](Asset/chatbot.png)
-![adminpanel](Asset/adminpanel.png)
-![AI Chatbot](Asset/adminportal.png)
-![AI Chatbot](Asset/product.png)
-![AI Chatbot](Asset/shippingdetails.png)
-![AI Chatbot](Asset/bookcategory.png)
-![AI Chatbot](Asset/Company.png)
-![AI Chatbot](Asset/paynentintegration.png)
-![AI Chatbot](Asset/paypal.png)
+![Homepage](Assets/HomePage.png)  
+![Cart Page](Assets/cart.png)  
+![order Page](Assets/orderlist.png)  
+![AI Chatbot](Assets/chatbot.png)
+![adminpanel](Assets/adminpanel.png)
+![AI Chatbot](Assets/adminportal.png)
+![AI Chatbot](Assets/product.png)
+![AI Chatbot](Assets/shippingdetails.png)
+![AI Chatbot](Assets/bookcategory.png)
+![AI Chatbot](Assets/Company.png)
+![AI Chatbot](Assets/paynentintegration.png)
+![AI Chatbot](Assets/paypal.png)
 
 
 
