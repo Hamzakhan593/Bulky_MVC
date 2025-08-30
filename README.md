@@ -55,7 +55,22 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 
 ## 📷 Screenshots  
 
-> _(Add screenshots of Homepage, Cart, Checkout, AI chatbot in action)_  
+![Homepage](Asset/HomePage.png)  
+![Cart Page](Asset/cart.png)  
+![Checkout Page](Asset/orderlist.png)  
+![AI Chatbot](Asset/chatbot.png)
+![AI Chatbot](Asset/adminpanel.png)
+![AI Chatbot](Asset/adminportal.png)
+![AI Chatbot](Asset/product.png)
+![AI Chatbot](Asset/shippingdetails.png)
+![AI Chatbot](Asset/bookcategory.png)
+![AI Chatbot](Asset/Company.png)
+![AI Chatbot](Asset/paynentintegration.png)
+![AI Chatbot](Asset/paypal.png)
+
+
+
+
 
 ---
 
