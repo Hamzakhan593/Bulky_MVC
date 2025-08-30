@@ -54,7 +54,7 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 ---
 ## 📷 Screenshots  
 
-![Homepage](./Assets/HomePage.png)  
+![Homepage](./screenshots/HomePage.png)  
 ![Cart Page](./Assets/cart.png)  
 ![Order Page](./Assets/orderlist.png)  
 ![AI Chatbot](./Assets/chatbot.png)  
