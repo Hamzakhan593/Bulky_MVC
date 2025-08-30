@@ -56,9 +56,9 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 
 ## 📷 Screenshots  
 
-![Homepage](./BulkyWeb/Assets/HomePage.png)  
-![Cart Page](./BulkyWeb/Assets/cart.png)  
-![Order Page](./BulkyWeb/Assets/orderlist.png)  
+![Homepage](./BulkyWeb/screenshots/HomePage.png)  
+![Cart Page](./BulkyWeb/screenshots/cart.png)  
+![Order Page](./BulkyWeb/screenshots/orderlist.png)  
 
 ---
 
