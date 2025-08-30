@@ -95,7 +95,7 @@ Here, users can browse books by category.
 This is the company information page, providing details about the bookstore.
 
 ### Payment Integration
-![Payment Integration](./BulkyWeb/screenshots/paynentintegration.png)  
+![Payment Integration](./BulkyWeb/screenshots/paymentintegration.png)  
 This page shows the integration of payment methods, allowing users to complete their purchase.
 
 ### PayPal
