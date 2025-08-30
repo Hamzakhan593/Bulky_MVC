@@ -11,22 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Models", "Bulky.Model
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Utility", "Bulky.Utility\Bulky.Utility.csproj", "{2B0B99F5-0C20-4BA7-BEE3-017B54575F1A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asset", "Asset", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		D:\Pictures\Screenshots\admin panel.png = D:\Pictures\Screenshots\admin panel.png
-		D:\Pictures\Screenshots\admin portal.png = D:\Pictures\Screenshots\admin portal.png
-		D:\Pictures\Screenshots\bookcategory.png = D:\Pictures\Screenshots\bookcategory.png
-		D:\Pictures\Screenshots\cart.png = D:\Pictures\Screenshots\cart.png
-		D:\Pictures\Screenshots\chatbot.png = D:\Pictures\Screenshots\chatbot.png
-		D:\Pictures\Screenshots\Company.png = D:\Pictures\Screenshots\Company.png
-		D:\Pictures\Screenshots\HomePage.png = D:\Pictures\Screenshots\HomePage.png
-		D:\Pictures\Screenshots\orderlist.png = D:\Pictures\Screenshots\orderlist.png
-		D:\Pictures\Screenshots\payment integration.png = D:\Pictures\Screenshots\payment integration.png
-		D:\Pictures\Screenshots\paypal.png = D:\Pictures\Screenshots\paypal.png
-		D:\Pictures\Screenshots\product.png = D:\Pictures\Screenshots\product.png
-		D:\Pictures\Screenshots\shipping details.png = D:\Pictures\Screenshots\shipping details.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
