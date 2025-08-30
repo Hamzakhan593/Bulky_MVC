@@ -54,7 +54,7 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 ---
 ## 📷 Screenshots  
 
-![Homepage](https://github.com/Hamzakhan593/Bulky_MVC/blob/master/screenshots/HomePage.png))  
+![Homepage](https://github.com/Hamzakhan593/Bulky_MVC/blob/master/screenshots/HomePage.png)
 ![Cart Page](./Assets/cart.png)  
 ![Order Page](./Assets/orderlist.png)  
 ![AI Chatbot](./Assets/chatbot.png)  
