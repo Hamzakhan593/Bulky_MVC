@@ -57,9 +57,9 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 
 ![Homepage](Asset/HomePage.png)  
 ![Cart Page](Asset/cart.png)  
-![Checkout Page](Asset/orderlist.png)  
+![order Page](Asset/orderlist.png)  
 ![AI Chatbot](Asset/chatbot.png)
-![AI Chatbot](Asset/adminpanel.png)
+![adminpanel](Asset/adminpanel.png)
 ![AI Chatbot](Asset/adminportal.png)
 ![AI Chatbot](Asset/product.png)
 ![AI Chatbot](Asset/shippingdetails.png)
@@ -78,5 +78,5 @@ It includes **payment integration (PayPal)**, **bulk discount logic**, and an **
 
 1. Clone the repository  
    ```bash
-   git clone https://github.com/YOUR-USERNAM/BiblioHub.git
-   cd BiblioHub
+   git clone https://github.com/hamzakhan593/Bulky_MVC
+   cd Bulky_MVC
