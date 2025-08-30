@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Asset\adminpanel.png" />
+    <Content Include="Asset\adminportal.png" />
+    <Content Include="Asset\bookcategory.png" />
+    <Content Include="Asset\cart.png" />
+    <Content Include="Asset\chatbot.png" />
+    <Content Include="Asset\Company.png" />
+    <Content Include="Asset\HomePage.png" />
+    <Content Include="Asset\orderlist.png" />
+    <Content Include="Asset\paymentintegration.png" />
+    <Content Include="Asset\paypal.png" />
+    <Content Include="Asset\product.png" />
+    <Content Include="Asset\shippingdetails.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.17" />
