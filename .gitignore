@@ -361,3 +361,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Secrets (prevent exposing keys)
+appsettings.json
+appsettings.*.json
+secrets.json
+/BulkyWeb/appsettings.json
+/BulkyWeb/appsettings.Production.json
+/BulkyWeb/appsettings.Development.json
