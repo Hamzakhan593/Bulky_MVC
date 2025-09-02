@@ -2,6 +2,7 @@
 
 A full-stack **ASP.NET Core MVC** application for managing book sales, designed for both **individual buyers** and **wholesale distributors**.  
 It includes **payment integration (PayPal)**, **bulk discount logic**, and an **AI-powered chatbot** for customer support.  
+**Click Here for Demo** : https://bookstorehamza-apc8cfbqgpa8h3bv.southeastasia-01.azurewebsites.net/
 
 ---
 
