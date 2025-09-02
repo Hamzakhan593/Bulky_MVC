@@ -101,16 +101,16 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     string fullPath = Path.Combine(uploadFolder, fileName);
 
 
-                    //// updating existing image
-                    //if (!string.IsNullOrEmpty(obj.Product.ImageURL))
-                    //{
-                    //    //delete old image
-                    //    var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageURL.TrimStart('\\'));
-                    //    if (System.IO.File.Exists(oldImagePath))
-                    //    {
-                    //        System.IO.File.Delete(oldImagePath);
-                    //    }
-                    //}
+                    // updating existing image
+                    if (!string.IsNullOrEmpty(obj.Product.ImageURL))
+                    {
+                        //delete old image
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageURL.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
 
                     // Step 6: Save the uploaded file to disk using a FileStream
                     using (var fileStream = new FileStream(fullPath, FileMode.Create))
